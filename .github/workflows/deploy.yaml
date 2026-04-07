@@ -38,10 +38,10 @@ jobs:
       run: docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/devops-demo:latest
 
     - name: Update kubeconfig for EKS
-  run: |
-    aws eks update-kubeconfig --region $AWS_REGION --name devops-cluster
+      run: |
+        aws eks update-kubeconfig --region $AWS_REGION --name devops-cluster
 
-- name: Deploy to Kubernetes
-  run: |
-    kubectl get nodes
-    kubectl set image deployment/devops-demo devops-demo=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/devops-demo:latest
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl get nodes
+        kubectl set image deployment/devops-demo devops-demo=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/devops-demo:latest
