@@ -37,6 +37,12 @@ jobs:
     - name: Push Image
       run: docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/devops-demo:latest
 
+    - name: Install kubectl
+      run: |
+        curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-11-14/bin/linux/amd64/kubectl
+        chmod +x kubectl
+        sudo mv kubectl /usr/local/bin/
+
     - name: Update kubeconfig for EKS
       run: |
         aws eks update-kubeconfig --region $AWS_REGION --name devops-cluster
